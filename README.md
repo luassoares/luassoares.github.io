@@ -1,4 +1,4 @@
-# Luana Sousa Soares — research website
+# Luana Soares — research website
 
 A fast, no-build personal research website for GitHub Pages: **About**, **Publications**, **Tutorials & Pipelines**, and **CV** — with dark mode, search/filters, and mobile layout.
 

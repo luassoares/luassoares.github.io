@@ -97,7 +97,7 @@
 
   /* ---------- Publication rendering ---------- */
   // Your name variants to highlight in author lists:
-  const ME = ["Soares LS", "Soares L", "L. S. Soares", "Luana Sousa Soares", "Luana S. Soares"];
+  const ME = ["Luana Soares", "Soares LS", "Soares L", "L. S. Soares", "Luana Sousa Soares", "Luana S. Soares"];
   let SITE_EMAIL = "";
   function highlightMe(authors) {
     let out = esc(authors);
@@ -110,13 +110,13 @@
     if (doiUrl) links.push(`<a href="${esc(doiUrl)}" target="_blank" rel="noopener">DOI</a>`);
     if (p.url) links.push(`<a href="${esc(p.url)}" target="_blank" rel="noopener">Link</a>`);
     if (p.pdf) links.push(`<a href="${esc(p.pdf)}" target="_blank" rel="noopener">PDF</a>`);
-    if (p.request && !p.pdf && SITE_EMAIL) links.push(`<a href="mailto:${esc(SITE_EMAIL)}?subject=${encodeURIComponent("PDF request: " + p.title)}">Request PDF</a>`);
+    if (p.request && !p.pdf && SITE_EMAIL) links.push(`<a href="mailto:${esc(SITE_EMAIL)}?subject=${encodeURIComponent("PDF request: " + p.title.replace(/<[^>]+>/g, ""))}">Request PDF</a>`);
     if (p.code) links.push(`<a href="${esc(p.code)}" target="_blank" rel="noopener">Code</a>`);
     if (p.data) links.push(`<a href="${esc(p.data)}" target="_blank" rel="noopener">Data</a>`);
     const badge = p.type && p.type !== "article" ? `<span class="badge ${esc(p.type)}">${esc(p.type)}</span>` : "";
     return `
       <div class="pub">
-        <div class="t">${esc(p.title)}${badge}</div>
+        <div class="t">${p.title}${badge}</div>
         <div class="a">${highlightMe(p.authors)}</div>
         <div class="v">${esc(p.venue)}${p.year ? ", " + esc(p.year) : ""}</div>
         ${p.note ? `<p class="n">${esc(p.note)}</p>` : ""}
@@ -164,7 +164,7 @@
           <h2>About me</h2>
           ${(profile.bio || []).map((p) => `<p>${p}</p>`).join("")}
           ${(profile.current_projects || []).map((cp) => `<div class="card project-card">
-            <span class="eyebrow" style="margin-bottom:.7rem">Current project</span>
+            <span class="eyebrow" style="margin-bottom:.7rem">${esc(cp.label || "Current project")}</span>
             <h3>${cp.title}</h3>
             <p class="muted" style="font-size:.88rem;margin:.1rem 0 .6rem">${esc(cp.funder)}</p>
             <p style="margin:0;font-size:.95rem">${cp.summary}</p>
@@ -291,8 +291,8 @@
             <div class="cv-item">
               <div class="when">${esc(it.when || "")}</div>
               <div>
-                <div><span class="what">${esc(it.what)}</span>${it.where ? ` <span class="where">· ${esc(it.where)}</span>` : ""}</div>
-                ${it.details ? `<div class="details">${esc(it.details)}</div>` : ""}
+                <div><span class="what">${it.what}</span>${it.where ? ` <span class="where">· ${it.where}</span>` : ""}</div>
+                ${it.details ? `<div class="details">${it.details}</div>` : ""}
               </div>
             </div>`).join("")}
         </div>`).join("");

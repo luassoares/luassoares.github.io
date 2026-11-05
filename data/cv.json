@@ -8,13 +8,13 @@
           "when": "Nov 2026 – present",
           "what": "Postdoctoral Researcher, Birgitta Sintring Fellow",
           "where": "Plant Ecology and Evolution, Department of Ecology and Genetics, Uppsala University, Sweden",
-          "details": "Supervisor: Mario Vallejo-Marín. Project: How new polyploid species form: population genomic insights from Mimulus peregrinus. Whole-genome resequencing to study subgenome ancestry, homoeologous exchange and selection after recent allopolyploidization."
+          "details": "Supervisor: Mario Vallejo-Marín. Project: How new polyploid species form: population genomic insights from <em>Mimulus peregrinus</em>. Whole-genome resequencing to study subgenome ancestry, homoeologous exchange and selection after recent allopolyploidization."
         },
         {
           "when": "2026 – present",
-          "what": "Postdoctoral Researcher (CAPES AURORA Program)",
+          "what": "Postdoctoral Researcher, parallel position (CAPES AURORA Program)",
           "where": "Department of Botany, Federal University of Rio Grande do Sul (UFRGS), Brazil",
-          "details": "Supervisor: Caroline Turchetto. Project: Evolutionary history, genetic diversity and conservation of Nicotiana sect. Alatae in the Campos Sulinos. DArT-seq bioinformatic pipelines, population genomics, gene flow and species delimitation, ecological niche modelling and climate refugia, and training of graduate students in bioinformatics."
+          "details": "Supervisor: Caroline Turchetto. Project: Evolutionary history, genetic diversity and conservation of <em>Nicotiana</em> sect. <em>Alatae</em> in the Campos Sulinos. DArT-seq bioinformatic pipelines, population genomics, gene flow and species delimitation, ecological niche modelling and climate refugia, and training of graduate students in bioinformatics."
         },
         {
           "when": "2025 – 2026",
@@ -32,7 +32,7 @@
           "when": "2021 – 2025",
           "what": "PhD researcher",
           "where": "Federal University of Rio Grande do Sul (UFRGS), Brazil",
-          "details": "Project: The highland's bloom: the impact of fast divergence in highland Petunia. Field expeditions and phenotyping, herbarium taxonomy, DNA extraction, genome assembly, population structure, phylogenomics and species delineation, hybridization/introgression detection, demographic inference and environmental association analysis."
+          "details": "Project: The highland's bloom: the impact of fast divergence in highland <em>Petunia</em>. Field expeditions and phenotyping, herbarium taxonomy, DNA extraction, genome assembly, population structure, phylogenomics and species delineation, hybridization/introgression detection, demographic inference and environmental association analysis."
         },
         {
           "when": "Jun – Dec 2023",
@@ -44,7 +44,7 @@
           "when": "2019 – 2021",
           "what": "Master's researcher",
           "where": "Federal University of Rio Grande do Sul (UFRGS), Brazil",
-          "details": "Project: Phylogeography, genetic diversity and population structuring of Petunia altiplana. Fieldwork, cpDNA and SSR genotyping, phylogeography, population genetics and demographic inference."
+          "details": "Project: Phylogeography, genetic diversity and population structuring of <em>Petunia altiplana</em>. Fieldwork, cpDNA and SSR genotyping, phylogeography, population genetics and demographic inference."
         },
         {
           "when": "2014 – 2018",
@@ -61,13 +61,13 @@
           "when": "2021 – 2025",
           "what": "PhD, Genetics and Molecular Biology",
           "where": "UFRGS, Brazil",
-          "details": "Thesis: The highland's bloom: the impact of fast divergence in highland Petunia. Advisor: Loreta Brandão de Freitas. Visiting student at Universitat Politècnica de València (6 months), advised by Aureliano Bombarely (CAPES-PrInt scholarship)."
+          "details": "Thesis: The highland's bloom: the impact of fast divergence in highland <em>Petunia</em>. Advisor: Loreta Brandão de Freitas. Visiting student at Universitat Politècnica de València (6 months), advised by Aureliano Bombarely (CAPES-PrInt scholarship)."
         },
         {
           "when": "2019 – 2021",
           "what": "MSc, Genetics and Molecular Biology",
           "where": "UFRGS, Brazil",
-          "details": "Thesis: Phylogeography, genetic diversity and population structuring of Petunia altiplana. Advisor: Loreta Brandão de Freitas."
+          "details": "Thesis: Phylogeography, genetic diversity and population structuring of <em>Petunia altiplana</em>. Advisor: Loreta Brandão de Freitas."
         },
         {
           "when": "2014 – 2018",
@@ -84,7 +84,7 @@
           "when": "2026",
           "what": "Birgitta Sintring Fellowship",
           "where": "Uppsala University",
-          "details": "Personal stipend of 831,600 SEK plus 405,000 SEK in running costs, for the project “How new polyploid species form: population genomic insights from Mimulus peregrinus”."
+          "details": "Personal stipend of 831,600 SEK plus 405,000 SEK in running costs, for the project “How new polyploid species form: population genomic insights from <em>Mimulus peregrinus</em>”."
         },
         {
           "when": "2026",
@@ -127,7 +127,18 @@
           "when": "2022 – 2024",
           "what": "Undergraduate mentor",
           "where": "UFRGS, Brazil",
-          "details": "Project: Contribution of interspecific hybridization to the genetic diversity of Petunia species."
+          "details": "Project: Contribution of interspecific hybridization to the genetic diversity of <em>Petunia</em> species."
+        }
+      ]
+    },
+    {
+      "title": "Courses & workshops attended",
+      "items": [
+        {
+          "when": "Jun 2026",
+          "what": "SLiM Workshop: evolutionary modelling with SLiM",
+          "where": "University of Tartu, Estonia",
+          "details": "Five-day workshop on individual-based, genetically explicit evolutionary simulation with SLiM, taught by Ben Haller (Messer Lab, Cornell University). 15–19 June 2026."
         }
       ]
     },
