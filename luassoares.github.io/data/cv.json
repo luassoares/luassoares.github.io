@@ -1,0 +1,156 @@
+{
+  "updated": "2026-11-05",
+  "sections": [
+    {
+      "title": "Research experience",
+      "items": [
+        {
+          "when": "Nov 2026 – present",
+          "what": "Postdoctoral Researcher, Birgitta Sintring Fellow",
+          "where": "Plant Ecology and Evolution, Department of Ecology and Genetics, Uppsala University, Sweden",
+          "details": "Supervisor: Mario Vallejo-Marín. Project: How new polyploid species form: population genomic insights from Mimulus peregrinus. Whole-genome resequencing to study subgenome ancestry, homoeologous exchange and selection after recent allopolyploidization."
+        },
+        {
+          "when": "2026 – present",
+          "what": "Postdoctoral Researcher (CAPES AURORA Program)",
+          "where": "Department of Botany, Federal University of Rio Grande do Sul (UFRGS), Brazil",
+          "details": "Supervisor: Caroline Turchetto. Project: Evolutionary history, genetic diversity and conservation of Nicotiana sect. Alatae in the Campos Sulinos. DArT-seq bioinformatic pipelines, population genomics, gene flow and species delimitation, ecological niche modelling and climate refugia, and training of graduate students in bioinformatics."
+        },
+        {
+          "when": "2025 – 2026",
+          "what": "Postdoctoral Researcher, Evolutionary Genomics",
+          "where": "Institute of Plant Molecular and Cellular Biology (IBMCP, CSIC-UPV), Valencia, Spain",
+          "details": "Project: Genomic architecture of rapid diversification in Solanaceae lineages. De novo and reference-guided genome assembly and annotation; structural variant and transposable element characterization; phylogenomics and introgression detection; comparative genomics of gene flow and adaptive evolution; reproducible pipelines in Nextflow."
+        },
+        {
+          "when": "2026",
+          "what": "Visiting researcher",
+          "where": "Finnish Museum of Natural History, University of Helsinki, Finland",
+          "details": "Research visit to Péter Poczai's group, funded by the ESEB Godfrey Hewitt Mobility Award."
+        },
+        {
+          "when": "2021 – 2025",
+          "what": "PhD researcher",
+          "where": "Federal University of Rio Grande do Sul (UFRGS), Brazil",
+          "details": "Project: The highland's bloom: the impact of fast divergence in highland Petunia. Field expeditions and phenotyping, herbarium taxonomy, DNA extraction, genome assembly, population structure, phylogenomics and species delineation, hybridization/introgression detection, demographic inference and environmental association analysis."
+        },
+        {
+          "when": "Jun – Dec 2023",
+          "what": "Visiting PhD researcher",
+          "where": "Universitat Politècnica de València, Spain",
+          "details": "RAD-seq genome assembly, evaluation of reference genome quality, and comparison of SNP calling across reference mapping strategies."
+        },
+        {
+          "when": "2019 – 2021",
+          "what": "Master's researcher",
+          "where": "Federal University of Rio Grande do Sul (UFRGS), Brazil",
+          "details": "Project: Phylogeography, genetic diversity and population structuring of Petunia altiplana. Fieldwork, cpDNA and SSR genotyping, phylogeography, population genetics and demographic inference."
+        },
+        {
+          "when": "2014 – 2018",
+          "what": "Undergraduate researcher",
+          "where": "Federal University of Goiás (UFG), Brazil",
+          "details": "Project: How do new enzymes arise? Molecular evolution of new gene copies in the rhodanese superfamily in Diptera."
+        }
+      ]
+    },
+    {
+      "title": "Education",
+      "items": [
+        {
+          "when": "2021 – 2025",
+          "what": "PhD, Genetics and Molecular Biology",
+          "where": "UFRGS, Brazil",
+          "details": "Thesis: The highland's bloom: the impact of fast divergence in highland Petunia. Advisor: Loreta Brandão de Freitas. Visiting student at Universitat Politècnica de València (6 months), advised by Aureliano Bombarely (CAPES-PrInt scholarship)."
+        },
+        {
+          "when": "2019 – 2021",
+          "what": "MSc, Genetics and Molecular Biology",
+          "where": "UFRGS, Brazil",
+          "details": "Thesis: Phylogeography, genetic diversity and population structuring of Petunia altiplana. Advisor: Loreta Brandão de Freitas."
+        },
+        {
+          "when": "2014 – 2018",
+          "what": "BSc, Biology",
+          "where": "Federal University of Goiás (UFG), Brazil",
+          "details": "Advisor: Iderval da Silva Sobrinho. Visiting student at Instituto Politécnico de Bragança, Portugal (international mobility)."
+        }
+      ]
+    },
+    {
+      "title": "Grants & awards",
+      "items": [
+        {
+          "when": "2026",
+          "what": "Birgitta Sintring Fellowship",
+          "where": "Uppsala University",
+          "details": "Personal stipend of 831,600 SEK plus 405,000 SEK in running costs, for the project “How new polyploid species form: population genomic insights from Mimulus peregrinus”."
+        },
+        {
+          "when": "2026",
+          "what": "Postdoctoral Fellowship, CAPES AURORA Program",
+          "where": "CAPES, Brazil · UFRGS"
+        },
+        {
+          "when": "2026",
+          "what": "ESEB Godfrey Hewitt Mobility Award (€2,000)",
+          "where": "European Society for Evolutionary Biology",
+          "details": "Completed research visit to Péter Poczai, Finnish Museum of Natural History, University of Helsinki."
+        },
+        {
+          "when": "2025",
+          "what": "Postdoctoral Fellowship (€30,000)",
+          "where": "National Council for Scientific and Technological Development (CNPq), Brazil"
+        },
+        {
+          "when": "2024",
+          "what": "ESEB Conference Travel Award (€1,132)",
+          "where": "European Society for Evolutionary Biology"
+        },
+        {
+          "when": "2023",
+          "what": "CAPES-PrInt Scholarship (€10,590)",
+          "where": "Doctoral stay at Universitat Politècnica de València"
+        }
+      ]
+    },
+    {
+      "title": "Teaching & mentoring",
+      "items": [
+        {
+          "when": "2023",
+          "what": "Workshop instructor: Genetic analysis of population genomics (30 h)",
+          "where": "UNNE-CONICET, Argentina",
+          "details": "Designed the curriculum and taught cleaning, filtering and de novo assembly of RAD-seq data."
+        },
+        {
+          "when": "2022 – 2024",
+          "what": "Undergraduate mentor",
+          "where": "UFRGS, Brazil",
+          "details": "Project: Contribution of interspecific hybridization to the genetic diversity of Petunia species."
+        }
+      ]
+    },
+    {
+      "title": "Skills",
+      "items": [
+        {
+          "what": "Programming",
+          "details": "R, Python, shell scripting; workflow managers Nextflow and Snakemake"
+        },
+        {
+          "what": "Genomics",
+          "details": "Genome assembly (long and short reads), structural variant calling, phylogenomics, comparative genomics, gene flow and introgression analysis, environmental association"
+        },
+        {
+          "what": "Field & lab",
+          "details": "Population sampling and phenotyping, herbarium specimen preparation, DNA extraction, PCR, SSR genotyping"
+        },
+        {
+          "what": "Languages",
+          "details": "Portuguese (native), English (proficient), Spanish (proficient)"
+        }
+      ]
+    }
+  ]
+}

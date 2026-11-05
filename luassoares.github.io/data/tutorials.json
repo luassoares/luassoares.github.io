@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "example-pipeline",
+    "title": "Example analysis pipeline",
+    "kind": "pipeline",
+    "summary": "A template showing how to document a full workflow: inputs, environment, step-by-step commands and outputs.",
+    "tags": ["bash", "workflow", "template"],
+    "updated": "2026-11-05",
+    "repo": "https://github.com/"
+  },
+  {
+    "slug": "example-tutorial",
+    "title": "Getting started: reproducible environments with conda",
+    "kind": "tutorial",
+    "summary": "How I set up isolated, reproducible software environments for every project.",
+    "tags": ["conda", "reproducibility"],
+    "updated": "2026-11-05",
+    "repo": ""
+  }
+]

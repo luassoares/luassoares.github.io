@@ -1,0 +1,83 @@
+{
+  "name": "Luana Sousa Soares",
+  "pronouns": "she/her",
+  "title": "Postdoctoral Researcher · Uppsala University & UFRGS",
+  "affiliation": "Uppsala University · UFRGS",
+  "location": "Uppsala, Sweden · Porto Alegre, Brazil",
+  "photo": "assets/img/profile.jpg",
+  "tagline": "I study how new plant species form: hybridization, polyploidy and rapid divergence, using genomic data from populations to whole species and lineages.",
+  "bio": [
+    "I am a postdoctoral researcher with two current positions. At Uppsala University, Sweden, I am a Birgitta Sintring Fellow in Plant Ecology and Evolution (Department of Ecology and Genetics), working with Mario Vallejo-Marín and studying how new polyploid species form using <em>Mimulus peregrinus</em>, a monkeyflower that arose less than 150 years ago. At the Department of Botany of the Federal University of Rio Grande do Sul (UFRGS), Brazil, I work with Caroline Turchetto on the evolutionary history, genetic diversity and conservation of <em>Nicotiana</em> sect. <em>Alatae</em> in the southern Brazilian grasslands (Campos Sulinos). My work spans population genomics and species-level phylogenomics, and many of my questions are answered with species-level data alone. Before this, I was a postdoctoral researcher at IBMCP (CSIC-UPV) in Valencia, Spain, working on the genomic architecture of rapid diversification in Solanaceae.",
+    "I did my PhD and MSc in Genetics and Molecular Biology at the Federal University of Rio Grande do Sul (UFRGS), Brazil, with Loreta B. Freitas, working on the fast divergence of highland <em>Petunia</em> species from the subtropical grasslands of southern South America, including a visiting stay at the Universitat Politècnica de València with Aureliano Bombarely. My background spans fieldwork and herbarium taxonomy, wet-lab genetics and bioinformatics.",
+    "On this site you'll find my publications, the tutorials and reproducible pipelines I use in my work, and my up-to-date CV."
+  ],
+  "interests": [
+    "Polyploidy & whole-genome duplication",
+    "Speciation & species delimitation",
+    "Hybridization & introgression",
+    "Population genomics",
+    "Phylogenomics",
+    "Conservation genomics",
+    "Ecological niche modelling",
+    "Genome assembly & annotation",
+    "Mimulus, Nicotiana, Petunia",
+    "Reproducible pipelines (Nextflow)"
+  ],
+  "email": "luana.soares@ebc.uu.se",
+  "links": [
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com/citations?user=jXkXodgAAAAJ",
+      "icon": "scholar"
+    },
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0000-0002-1893-3576",
+      "icon": "orcid"
+    },
+    {
+      "label": "Lattes CV",
+      "url": "http://lattes.cnpq.br/8923218592244254",
+      "icon": "lattes"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/luassoares",
+      "icon": "github"
+    }
+  ],
+  "cv_pdf": "assets/cv/CV.pdf",
+  "current_projects": [
+    {
+      "title": "How new polyploid species form: population genomic insights from <em>Mimulus peregrinus</em>",
+      "funder": "Uppsala University · Birgitta Sintring Fellowship · with Mario Vallejo-Marín · from November 2026",
+      "summary": "<em>Mimulus peregrinus</em> is one of the youngest known polyploid plant species. It arose in Scotland from hybridization between two introduced monkeyflowers, <em>M. guttatus</em> and <em>M. luteus</em>, followed by whole-genome duplication, and it formed independently at least twice. Using whole-genome resequencing, I will characterize how the parental subgenomes are retained, exchanged or lost after polyploidization, and test whether natural selection shapes these early genome changes."
+    },
+    {
+      "title": "Evolutionary history, genetic diversity and conservation of <em>Nicotiana</em> sect. <em>Alatae</em> in the Campos Sulinos",
+      "funder": "UFRGS, Department of Botany · CAPES AURORA Program · with Caroline Turchetto",
+      "summary": "Using DArT-seq genomic data, I study the diversity, population structure, lineage delimitation, gene flow and hybridization of <em>Nicotiana</em> species from the southern Brazilian grasslands. I combine genomic, environmental and spatial data to map genetic diversity, model habitat suitability, find historical and future climate refugia, and identify priority areas for conservation. I also build reproducible pipelines and train students in bioinformatics and genomic data analysis."
+    }
+  ],
+  "affiliations": [
+    {
+      "department": "Department of Ecology and Genetics, Plant Ecology and Evolution",
+      "institution": "Uppsala University",
+      "url": "https://www.uu.se/en/contact-and-organisation/organisation?query=X137:4",
+      "address": [
+        "Evolutionsbiologiskt Centrum (EBC)",
+        "Norbyvägen 18 D",
+        "752 36 Uppsala, Sweden"
+      ]
+    },
+    {
+      "department": "Department of Botany",
+      "institution": "Federal University of Rio Grande do Sul (UFRGS)",
+      "url": "",
+      "address": [
+        "Porto Alegre, RS, Brazil"
+      ]
+    }
+  ],
+  "email_alt": "lusousa.soares11@gmail.com"
+}
