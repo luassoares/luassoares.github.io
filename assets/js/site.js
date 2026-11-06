@@ -156,7 +156,10 @@
               <a class="btn" href="cv.html">CV</a>
             </div>
           </div>
-          <div class="photo-wrap reveal" style="animation-delay:.12s"><img src="${esc(profile.photo)}" alt="Photo of ${esc(profile.name)}"></div>
+          <div class="photo-col reveal" style="animation-delay:.12s">
+            <div class="photo-wrap"><img src="${esc(profile.photo)}" alt="Photo of ${esc(profile.name)}"></div>
+            <div class="social">${socialLinks(profile)}</div>
+          </div>
         </div>`;
 
       $("#about").innerHTML = `
@@ -171,7 +174,6 @@
           </div>`).join("")}
           <h3 style="margin-top:1.6rem">Research interests</h3>
           <div class="chips">${(profile.interests || []).map((i) => `<span class="chip">${esc(i)}</span>`).join("")}</div>
-          <div class="social" style="margin-top:1.6rem">${socialLinks(profile)}</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:1.2rem">
         <div class="card"><h2 style="font-size:1.3rem">Contact</h2>
@@ -280,11 +282,35 @@
 
     async cv(profile) {
       const cv = await getJSON("data/cv.json");
-      $("#cv-updated").textContent = "Last updated " + fmtDate(cv.updated);
+      const upd = (() => { const d = new Date((cv.updated || "").slice(0, 7) + "-01"); return isNaN(d) ? cv.updated : d.toLocaleDateString("en-GB", { month: "short" }).slice(0, 3) + "/" + d.getFullYear(); })();
+      $("#cv-updated").textContent = upd;
       const dl = $("#cv-download");
       dl.href = profile.cv_pdf;
       fetch(profile.cv_pdf, { method: "HEAD" }).then((r) => { if (!r.ok) dl.style.display = "none"; }).catch(() => (dl.style.display = "none"));
-      $("#cv-body").innerHTML = cv.sections.map((s) => `
+      const pubs = await getJSON("data/publications.json").catch(() => []);
+      const linkTxt = (l) => l.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+      const head = `
+        <div class="print-only cv-print-head">
+          <h1>${esc(profile.name)}</h1>
+          <div class="cv-print-top"><p class="sub">${esc(profile.title)}${profile.pronouns ? " · " + esc(profile.pronouns) : ""}</p><span class="cv-upd">${esc(upd)}</span></div>
+          <div class="contact">
+            ${(profile.affiliations || []).slice(0, 1).map((a) => `${esc(a.department)}, ${esc(a.institution)} · ${(a.address || []).map(esc).join(", ")}`).join("")}<br>
+            ${[profile.email, profile.email_alt].filter(Boolean).map(esc).join(" · ")} · ${esc((profile.website || "").replace(/^https?:\/\//, ""))}<br>
+            ${(profile.links || []).map((l) => `${esc(l.label)}: ${esc(linkTxt(l))}`).join(" · ")}
+          </div>
+        </div>`;
+      const cite = (p) => `${highlightMe(p.authors)} (${esc(p.year)}). ${p.title}${/[?!.]$/.test(p.title.replace(/<[^>]+>/g, "")) ? "" : "."} <em>${esc(p.venue)}</em>.${p.doi ? " https://doi.org/" + esc(p.doi) : ""}`;
+      const group = (title, list) => list.length ? `<div class="cv-sub">${title}</div><ol class="cv-pubs-list">${list.map((p) => `<li>${cite(p)}</li>`).join("")}</ol>` : "";
+      const byYear = (a, b) => (b.year || 0) - (a.year || 0);
+      const pubSection = `
+        <div class="cv-section print-only cv-pubs">
+          <h2>Publications</h2>
+          ${group("Peer-reviewed articles", pubs.filter((p) => (p.type || "article") === "article").sort(byYear))}
+          ${group("Preprints &amp; manuscripts in revision", pubs.filter((p) => p.type === "preprint").sort(byYear))}
+          ${group("Theses", pubs.filter((p) => p.type === "thesis").sort(byYear))}
+          ${group("Conference presentations", pubs.filter((p) => p.type === "conference").sort(byYear).map((p) => ({ ...p, authors: p.authors + (p.note ? " [" + p.note + "]" : "") })))}
+        </div>`;
+      $("#cv-body").innerHTML = head + cv.sections.map((s) => `
         <div class="cv-section">
           <h2>${esc(s.title)}</h2>
           ${s.items.map((it) => `
@@ -295,7 +321,7 @@
                 ${it.details ? `<div class="details">${it.details}</div>` : ""}
               </div>
             </div>`).join("")}
-        </div>`).join("");
+        </div>`).join("") + pubSection;
     }
   };
 

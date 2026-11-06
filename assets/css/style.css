@@ -2,6 +2,16 @@
    Research website — main stylesheet
    Change the colors below to re-theme the whole site.
    ========================================================== */
+/* Fonts (bundled locally) */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/inter-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/inter-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap; src: url("../fonts/inter-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/inter-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/space-grotesk-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+
 :root {
   --accent: #0f766e;        /* deep teal */
   --accent-2: #f2735a;      /* coral */
@@ -292,3 +302,42 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
 
 .pronouns { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: 0; vertical-align: middle; white-space: nowrap; }
 .project-card { margin: 1.6rem 0; border-left: 4px solid var(--accent); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, var(--surface)), var(--surface)); }
+
+/* ---------- Social icons under the profile photo ---------- */
+.photo-col { display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+.photo-col .photo-wrap { width: 100%; }
+.photo-col .social { justify-content: center; flex-wrap: wrap; }
+@media (max-width: 760px) { .photo-col { order: -1; align-items: flex-start; } .photo-col .photo-wrap { width: 200px; } }
+
+/* ---------- CV: print-only parts ---------- */
+.print-only { display: none; }
+.cv-print-head h1 { font-size: 26pt; margin: 0 0 2pt; }
+.cv-print-head .sub { font-size: 11pt; color: #333; margin: 0 0 6pt; }
+.cv-print-head .contact { font-size: 9pt; color: #333; line-height: 1.5; }
+.cv-print-head .contact a { color: #0f766e; }
+.cv-pubs-list { margin: 0; padding-left: 1.2em; }
+.cv-pubs-list li { margin-bottom: .45rem; font-size: .93rem; }
+.cv-pubs-list .me { font-weight: 700; text-decoration: none; }
+
+@media print {
+  @page { size: A4; margin: 14mm 15mm 14mm; }
+  .print-only { display: block; }
+  .page-head { display: none !important; }
+  html, body { font-size: 9.5pt; line-height: 1.42; background: #fff !important; color: #111 !important; }
+  [data-theme="dark"] { --text: #111; --muted: #444; --border: #ddd; --accent: #0f766e; --surface-2: #f2f2f2; }
+  main.container { width: 100%; }
+  #cv-body { padding: 0 !important; }
+  .cv-print-head { border-bottom: 2px solid #0f766e; padding-bottom: 8pt; margin-bottom: 12pt; }
+  .cv-section { margin-bottom: 12pt; }
+  .cv-pubs { break-before: page; }
+  .cv-sub { break-after: avoid; }
+  .cv-section h2 { font-size: 12.5pt; margin: 0 0 4pt; break-after: avoid; color: #0f766e; }
+  .cv-item { grid-template-columns: 26mm 1fr; gap: 4mm; padding: 3.5pt 0; break-inside: avoid; }
+  .cv-item .when { font-size: 8pt; color: #555; }
+  .cv-item .details { font-size: 8.8pt; color: #222; }
+  .cv-pubs-list li { font-size: 8.6pt; margin-bottom: 2pt; line-height: 1.38; break-inside: avoid; }
+  .cv-sub { font-size: 9.5pt; font-weight: 700; margin: 6pt 0 3pt; }
+  a { color: inherit; text-decoration: none; }
+}
+.cv-print-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.cv-upd { font-size: 9pt; color: #555; white-space: nowrap; }
