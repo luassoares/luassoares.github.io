@@ -236,10 +236,10 @@ a.card:hover { text-decoration: none; transform: translateY(-3px); border-color:
 .empty { color: var(--muted); padding: 2rem 0; }
 
 /* ---------- Tutorial article ---------- */
-.article-wrap { display: grid; grid-template-columns: 1fr 220px; gap: 3rem; padding: 2.5rem 0 4rem; }
-@media (max-width: 960px) { .article-wrap { grid-template-columns: 1fr; } .toc { display: none; } }
+.article-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 3rem; padding: 2.5rem 0 4rem; }
+@media (max-width: 960px) { .article-wrap { grid-template-columns: minmax(0, 1fr); } .toc { display: none; } }
 .back { display: inline-flex; gap: .4rem; align-items: center; font-weight: 600; font-size: .92rem; margin-bottom: 1.5rem; }
-.article { min-width: 0; }
+.article { min-width: 0; overflow-wrap: anywhere; }
 .article h1 { font-size: clamp(2rem, 4vw, 2.8rem); }
 .article h2 { font-size: 1.5rem; margin-top: 2.2em; padding-top: .4em; }
 .article h3 { margin-top: 1.6em; }
@@ -256,7 +256,7 @@ a.card:hover { text-decoration: none; transform: translateY(-3px); border-color:
   background: #252b36; color: #c9cfda; border: 0; border-radius: 6px; padding: .3rem .6rem; cursor: pointer; opacity: 0; transition: opacity .15s;
 }
 .article pre:hover .copy-btn { opacity: 1; }
-.article table { width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1.2em 0; display: block; overflow-x: auto; }
+.article table { max-width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1.2em 0; display: block; overflow-x: auto; }
 .article th, .article td { text-align: left; padding: .55rem .8rem; border-bottom: 1px solid var(--border); }
 .article th { background: var(--surface-2); font-weight: 600; }
 .article-meta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: 1.5rem; color: var(--muted); font-size: .9rem; }
@@ -341,3 +341,9 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
 }
 .cv-print-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .cv-upd { font-size: 9pt; color: #555; white-space: nowrap; }
+
+/* ---------- Tutorial series ---------- */
+.tut-series { margin-bottom: 2.5rem; }
+.series-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+.series-head h2 { margin: 0; font-size: 1.4rem; }
+.kind.setup { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }

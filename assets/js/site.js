@@ -229,13 +229,23 @@
 
     async tutorials() {
       const tuts = await getJSON("data/tutorials.json");
+      const kinds = [...new Set(tuts.map((t) => t.kind))];
+      const label = { pipeline: "Pipelines", tutorial: "Tutorials", setup: "Setup" };
+      $("#filters").innerHTML = ["all", ...kinds].map((k) => `<button class="filter ${k === "all" ? "on" : ""}" data-type="${esc(k)}">${k === "all" ? "All" : esc(label[k] || k)}</button>`).join("");
       let current = "all", query = "";
       function draw() {
         const q = query.toLowerCase();
         const list = tuts
           .filter((t) => current === "all" || t.kind === current)
-          .filter((t) => !q || [t.title, t.summary, (t.tags || []).join(" ")].join(" ").toLowerCase().includes(q));
-        $("#tut-list").innerHTML = list.map(tutorialCard).join("") || '<p class="empty">Nothing here yet.</p>';
+          .filter((t) => !q || [t.title, t.summary, t.series, (t.tags || []).join(" ")].join(" ").toLowerCase().includes(q));
+        const groups = [...new Set(list.map((t) => t.series || ""))];
+        $("#tut-list").innerHTML = groups.map((g) => {
+          const items = list.filter((t) => (t.series || "") === g);
+          const repo = items[0].series_repo;
+          return `<div class="tut-series">
+            ${g ? `<div class="series-head"><h2>${esc(g)}</h2>${repo ? `<a class="btn" href="${esc(repo)}" target="_blank" rel="noopener">${ICONS.github} Repository on GitHub</a>` : ""}</div>` : ""}
+            <div class="grid-cards">${items.map(tutorialCard).join("")}</div></div>`;
+        }).join("") || '<p class="empty">Nothing here yet.</p>';
       }
       $("#filters").onclick = (e) => {
         const b = e.target.closest(".filter"); if (!b) return;
@@ -253,7 +263,10 @@
       const meta = tuts.find((t) => t.slug === slug);
       if (!meta) { $("#article").innerHTML = '<h1>Not found</h1><p>This tutorial does not exist. <a href="tutorials.html">See all tutorials</a>.</p>'; return; }
       document.title = meta.title + " · " + document.title;
-      const md = await fetch(`tutorials/${encodeURIComponent(slug)}.md`, { cache: "no-cache" }).then((r) => r.text());
+      const local = () => fetch(`tutorials/${encodeURIComponent(slug)}.md`, { cache: "no-cache" }).then((r) => r.text());
+      const md = meta.source
+        ? await fetch(meta.source, { cache: "no-cache" }).then((r) => { if (!r.ok) throw 0; return r.text(); }).catch(local)
+        : await local();
       const html = window.marked ? window.marked.parse(md) : `<pre>${esc(md)}</pre>`;
       $("#article").innerHTML = html;
       const h1 = $("#article h1");
@@ -262,8 +275,25 @@
       metaRow.innerHTML = `<span class="kind ${esc(meta.kind)}" style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px">${esc(meta.kind)}</span>
         <span>Updated ${fmtDate(meta.updated)}</span>
         ${(meta.tags || []).map((g) => `<span class="chip">${esc(g)}</span>`).join("")}
-        ${meta.repo ? `<a class="btn" style="padding:.3rem .8rem;font-size:.85rem" href="${esc(meta.repo)}" target="_blank" rel="noopener">${ICONS.github} Repository</a>` : ""}`;
+        ${meta.repo ? `<a class="btn" style="padding:.3rem .8rem;font-size:.85rem" href="${esc(meta.repo)}" target="_blank" rel="noopener">${ICONS.github} View on GitHub</a>` : ""}`;
       if (h1) h1.after(metaRow); else $("#article").prepend(metaRow);
+
+      // Relative links in the GitHub README → GitHub, or to this site if it is another tutorial
+      if (meta.series_repo && meta.folder) {
+        const base = `${meta.series_repo}/blob/main/${meta.folder}/`;
+        document.querySelectorAll("#article a[href], #article img[src]").forEach((el) => {
+          const attr = el.tagName === "IMG" ? "src" : "href";
+          const v = el.getAttribute(attr);
+          if (!v || /^(https?:|mailto:|#)/.test(v)) return;
+          const u = new URL(v, base);
+          if (attr === "src") { el.src = u.href.replace("/blob/", "/raw/"); return; }
+          const m = u.pathname.match(/\/(?:blob|tree)\/main\/([^/]+)\/?$/);
+          const twin = m && tuts.find((t) => t.series_repo === meta.series_repo && t.folder === m[1]);
+          el.href = twin ? `tutorial.html?t=${encodeURIComponent(twin.slug)}` : u.href;
+          if (!twin) { el.target = "_blank"; el.rel = "noopener"; }
+        });
+      }
+      document.querySelectorAll("#article a[href^='http']").forEach((a) => { a.target = "_blank"; a.rel = "noopener"; });
 
       // Syntax highlighting + copy buttons
       document.querySelectorAll("#article pre code").forEach((block) => {

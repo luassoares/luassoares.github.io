@@ -32,8 +32,17 @@ All content lives in simple data files. You never need to touch the HTML.
 Copy one block in `data/publications.json` and edit it. `type` can be `article`, `preprint`, `conference`, `thesis`, `chapter` or `talk`. Set `"featured": true` to show it on the home page. Leave links you don't have as `""`.
 
 ### Add a tutorial or pipeline
-1. Write it in Markdown as `tutorials/my-new-pipeline.md` (code blocks get syntax highlighting and a *Copy* button automatically).
-2. Add an entry to `data/tutorials.json` with `"slug": "my-new-pipeline"` and `"kind": "pipeline"` or `"tutorial"`.
+**From your GitHub tutorials repository (recommended).** The tutorials live in
+<https://github.com/luassoares/genomics-tutorials>, and the website reads each
+`README.md` straight from GitHub, so edits you push there appear on the site
+automatically. To add a new one, add an entry to `data/tutorials.json` with:
+`slug`, `title`, `kind` (`tutorial`, `pipeline` or `setup`), `summary`, `tags`,
+`updated`, `series`, `series_repo`, `folder` (the folder name in the repository),
+`repo` (link to that folder) and `source` (the raw README link). A copy of the
+README in `tutorials/<slug>.md` is used as a backup if GitHub can't be reached.
+
+**Directly on this site.** Write a Markdown file `tutorials/<slug>.md` and add
+an entry to `data/tutorials.json` without `source`.
 
 ### Update your CV
 Replace `assets/cv/CV.pdf`, edit `data/cv.json`, and change the `updated` date.
