@@ -1,0 +1,19 @@
+{
+  "topics": [
+    {
+      "title": "Population genomics and phylogenomics with SNP data",
+      "summary": "Step-by-step tutorials, with simple scripts, for analysing RAD-seq or DArTseq data of closely related populations and species: from the raw reads to the population structure, the relationships between groups and the tests of gene flow. Written for students, on a Linux server without administrator access, with conda and RStudio.",
+      "repo": "https://github.com/luassoares/genomics-tutorials",
+      "parts": [
+        {
+          "series": "Part 1 · From raw reads to population structure",
+          "summary": "Follow the tutorials in order: the output of each one is the input of the next. From quality control of the raw reads to SNP calling, filtering, diversity, clustering and maps of gene flow."
+        },
+        {
+          "series": "Part 2 · Phylogenomics and introgression",
+          "summary": "Infer the relationships between populations or species and test for hybridization and gene flow, starting from the filtered VCF of Part 1. More tutorials are coming."
+        }
+      ]
+    }
+  ]
+}

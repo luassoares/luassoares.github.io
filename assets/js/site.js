@@ -137,6 +137,20 @@
       </a>`;
   }
 
+  function tutorialRow(t) {
+    return `
+      <a class="tut-row" href="tutorial.html?t=${encodeURIComponent(t.slug)}">
+        <div class="tut-main">
+          <div class="tut-title"><span class="kind ${esc(t.kind)}">${esc(t.kind === "setup" ? "getting started" : t.kind)}</span><h3>${esc(t.title)}</h3></div>
+          <p class="summary">${t.summary}</p>
+        </div>
+        <div class="tut-side">
+          <div class="chips">${(t.tags || []).map((g) => `<span class="chip">${esc(g)}</span>`).join("")}</div>
+          <span class="tut-date">${fmtDate(t.updated)}</span>
+        </div>
+      </a>`;
+  }
+
   /* ---------- Pages ---------- */
   const pages = {
     async home(profile) {
@@ -229,24 +243,69 @@
     },
 
     async tutorials() {
-      const tuts = await getJSON("data/tutorials.json");
+      const [tuts, topicData] = await Promise.all([
+        getJSON("data/tutorials.json"),
+        getJSON("data/tutorial_topics.json").catch(() => ({ topics: [] }))
+      ]);
+      const topics = topicData.topics || [];
       const kinds = [...new Set(tuts.map((t) => t.kind))];
       const label = { pipeline: "Pipelines", tutorial: "Tutorials", setup: "Getting started" };
       $("#filters").innerHTML = ["all", ...kinds].map((k) => `<button class="filter ${k === "all" ? "on" : ""}" data-type="${esc(k)}">${k === "all" ? "All" : esc(label[k] || k)}</button>`).join("");
       let current = "all", query = "";
+      const open = new Set();
+      const plural = (n) => `${n} tutorial${n === 1 ? "" : "s"}`;
+
+      function part(series, summary, items, searching) {
+        const isOpen = searching || open.has(series);
+        return `<details class="part" data-series="${esc(series)}" ${isOpen ? "open" : ""}>
+          <summary>
+            <div class="part-text">
+              <h3>${esc(series)}</h3>
+              ${summary ? `<p>${esc(summary)}</p>` : ""}
+            </div>
+            <span class="part-count">${plural(items.length)}</span>
+            <span class="part-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="tut-list">${items.map(tutorialRow).join("")}</div>
+        </details>`;
+      }
+
       function draw() {
         const q = query.toLowerCase();
+        const searching = !!q || current !== "all";
         const list = tuts
           .filter((t) => current === "all" || t.kind === current)
           .filter((t) => !q || [t.title, t.summary, t.series, (t.tags || []).join(" ")].join(" ").toLowerCase().includes(q));
-        const groups = [...new Set(list.map((t) => t.series || ""))];
-        $("#tut-list").innerHTML = groups.map((g) => {
-          const items = list.filter((t) => (t.series || "") === g);
-          const repo = items[0].series_repo;
-          return `<div class="tut-series">
-            ${g ? `<div class="series-head"><h2>${esc(g)}</h2>${repo ? `<a class="btn" href="${esc(repo)}" target="_blank" rel="noopener">${ICONS.github} Repository on GitHub</a>` : ""}</div>` : ""}
-            <div class="grid-cards">${items.map(tutorialCard).join("")}</div></div>`;
-        }).join("") || '<p class="empty">Nothing here yet.</p>';
+        const placed = new Set();
+        let html = topics.map((tp) => {
+          const parts = tp.parts.map((pt) => {
+            const items = list.filter((t) => t.series === pt.series);
+            items.forEach((t) => placed.add(t.slug));
+            return items.length ? part(pt.series, pt.summary, items, searching) : "";
+          }).join("");
+          if (!parts) return "";
+          const total = tuts.filter((t) => tp.parts.some((pt) => pt.series === t.series)).length;
+          return `<section class="topic">
+            <div class="topic-head">
+              <div>
+                <span class="eyebrow" style="margin-bottom:.6rem">Topic · ${plural(total)} · ${tp.parts.length} parts</span>
+                <h2>${esc(tp.title)}</h2>
+                <p>${esc(tp.summary)}</p>
+              </div>
+              ${tp.repo ? `<a class="btn" href="${esc(tp.repo)}" target="_blank" rel="noopener">${ICONS.github} Repository on GitHub</a>` : ""}
+            </div>
+            ${parts}
+            ${searching ? "" : `<p class="part-hint">Click a part to see its tutorials.</p>`}
+          </section>`;
+        }).join("");
+        // tutorials that are not in any topic
+        const rest = list.filter((t) => !placed.has(t.slug));
+        const groups = [...new Set(rest.map((t) => t.series || "Other tutorials"))];
+        html += groups.map((g) => part(g, "", rest.filter((t) => (t.series || "Other tutorials") === g), true)).join("");
+        $("#tut-list").innerHTML = html || '<p class="empty">Nothing matches your search.</p>';
+        document.querySelectorAll("#tut-list details.part").forEach((d) => {
+          d.addEventListener("toggle", () => { if (!searching) d.open ? open.add(d.dataset.series) : open.delete(d.dataset.series); });
+        });
       }
       $("#filters").onclick = (e) => {
         const b = e.target.closest(".filter"); if (!b) return;

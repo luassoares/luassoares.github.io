@@ -41,6 +41,10 @@ automatically. To add a new one, add an entry to `data/tutorials.json` with:
 `repo` (link to that folder) and `source` (the raw README link). A copy of the
 README in `tutorials/<slug>.md` is used as a backup if GitHub can't be reached.
 
+**Topics and parts.** The big topic and its parts (with their descriptions)
+are in `data/tutorial_topics.json`. A tutorial goes into a part when its
+`series` in `data/tutorials.json` has exactly the same name as the part.
+
 **Directly on this site.** Write a Markdown file `tutorials/<slug>.md` and add
 an entry to `data/tutorials.json` without `source`.
 
