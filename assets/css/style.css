@@ -347,3 +347,4 @@ footer .container { display: flex; flex-wrap: wrap; justify-content: space-betwe
 .series-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
 .series-head h2 { margin: 0; font-size: 1.4rem; }
 .kind.setup { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.article h1, .article h2, .article h3, .article h4 { scroll-margin-top: 84px; }

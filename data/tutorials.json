@@ -1,21 +1,228 @@
 [
   {
-    "slug": "snp-00-setup",
-    "title": "00 · Setup: installing the tools without root access",
+    "slug": "snp-00-linux-basics",
+    "title": "00 · Linux basics",
     "kind": "setup",
-    "summary": "Install PAUP*, Dsuite, vcftools, Ruby and the other tools in your home directory on a Linux server, including the fix for the libgfortran.so.4 error.",
+    "summary": "New to the terminal? Connect to a server, learn the commands you'll use every day, keep long analyses running with byobu, and add programs to your PATH.",
     "tags": [
-      "installation",
-      "conda",
-      "PAUP*",
-      "Dsuite"
+      "Linux",
+      "terminal",
+      "byobu"
     ],
-    "updated": "2026-11-09",
-    "series": "Phylogenomics & introgression with SNP data",
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "00_linux_basics",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/00_linux_basics",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/00_linux_basics/README.md"
+  },
+  {
+    "slug": "snp-00-setup",
+    "title": "00 · Setup: conda and project organization",
+    "kind": "setup",
+    "summary": "Install the programs with conda, without administrator access, and organize your project folders so data, scripts and results stay apart.",
+    "tags": [
+      "conda",
+      "project structure",
+      "RStudio"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
     "series_repo": "https://github.com/luassoares/genomics-tutorials",
     "folder": "00_setup",
     "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/00_setup",
     "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/00_setup/README.md"
+  },
+  {
+    "slug": "snp-01-raw-reads",
+    "title": "01 · Raw reads: quality control and cleaning",
+    "kind": "tutorial",
+    "summary": "Are the reads good? Check their quality with FastQC and MultiQC, then remove barcodes and adapters and trim low-quality bases with fastq-mcf.",
+    "tags": [
+      "FastQC",
+      "MultiQC",
+      "fastq-mcf"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "01_raw_reads",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/01_raw_reads",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/01_raw_reads/README.md"
+  },
+  {
+    "slug": "snp-02-snp-calling",
+    "title": "02 · Mapping and SNP calling",
+    "kind": "tutorial",
+    "summary": "From clean reads to a VCF: map to a reference genome with BWA and call variants with FreeBayes, or build loci de novo with Stacks when there is no reference.",
+    "tags": [
+      "BWA",
+      "FreeBayes",
+      "Stacks",
+      "VCF"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "02_snp_calling",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/02_snp_calling",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/02_snp_calling/README.md"
+  },
+  {
+    "slug": "snp-03-filtering",
+    "title": "03 · Filtering the VCF",
+    "kind": "tutorial",
+    "summary": "Which samples and SNPs to keep? Filter for quality and missing data, choose the right VCF for each analysis, and find outlier SNPs with pcadapt.",
+    "tags": [
+      "vcftools",
+      "bcftools",
+      "pcadapt"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "03_filtering",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/03_filtering",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/03_filtering/README.md"
+  },
+  {
+    "slug": "snp-04-genetic-diversity",
+    "title": "04 · Genetic diversity and differentiation",
+    "kind": "tutorial",
+    "summary": "How diverse is each population, and how different are they? Estimate π, heterozygosity, F<sub>IS</sub>, private alleles and pairwise F<sub>ST</sub> with Stacks populations.",
+    "tags": [
+      "diversity",
+      "FST",
+      "Stacks"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "04_genetic_diversity",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/04_genetic_diversity",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/04_genetic_diversity/README.md"
+  },
+  {
+    "slug": "snp-05-pca-dapc",
+    "title": "05 · PCA and DAPC in RStudio",
+    "kind": "tutorial",
+    "summary": "How are the individuals grouped, without a model? Explore the structure with a PCA and find genetic clusters with DAPC, step by step in RStudio.",
+    "tags": [
+      "PCA",
+      "DAPC",
+      "adegenet",
+      "R"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "05_pca_dapc",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/05_pca_dapc",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/05_pca_dapc/README.md",
+    "featured": true
+  },
+  {
+    "slug": "snp-06-structure",
+    "title": "06 · STRUCTURE and fastSTRUCTURE",
+    "kind": "tutorial",
+    "summary": "How many genetic clusters, and what is the ancestry of each individual? Run STRUCTURE and fastSTRUCTURE, choose K, and plot the results with pophelper.",
+    "tags": [
+      "STRUCTURE",
+      "fastSTRUCTURE",
+      "pophelper"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "06_structure",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/06_structure",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/06_structure/README.md",
+    "featured": true
+  },
+  {
+    "slug": "snp-07-snmf-tess3",
+    "title": "07 · sNMF and TESS3: ancestry coefficients and maps",
+    "kind": "tutorial",
+    "summary": "Fast alternatives to STRUCTURE: ancestry coefficients with sNMF (without geography) and TESS3 (with coordinates), as bar plots and on a map.",
+    "tags": [
+      "sNMF",
+      "TESS3",
+      "LEA",
+      "maps"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "07_snmf_tess3",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/07_snmf_tess3",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/07_snmf_tess3/README.md"
+  },
+  {
+    "slug": "snp-08-construct",
+    "title": "08 · conStruct: structure and isolation by distance",
+    "kind": "tutorial",
+    "summary": "Discrete groups, continuous isolation by distance, or both? Compare spatial and non-spatial models with conStruct and cross-validation.",
+    "tags": [
+      "conStruct",
+      "isolation by distance"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "08_construct",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/08_construct",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/08_construct/README.md"
+  },
+  {
+    "slug": "snp-09-eems",
+    "title": "09 · EEMS: effective migration surfaces",
+    "kind": "tutorial",
+    "summary": "Where are the barriers and corridors to gene flow? Map effective migration and diversity surfaces with EEMS.",
+    "tags": [
+      "EEMS",
+      "gene flow",
+      "maps"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "09_eems",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/09_eems",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/09_eems/README.md"
+  },
+  {
+    "slug": "snp-10-feems",
+    "title": "10 · FEEMS: fast effective migration surfaces",
+    "kind": "tutorial",
+    "summary": "The fast successor of EEMS: migration surfaces with the smoothing chosen by cross-validation, on a grid made for your study area.",
+    "tags": [
+      "FEEMS",
+      "gene flow",
+      "Python"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 1 · From raw reads to population structure",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "10_feems",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/10_feems",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/10_feems/README.md"
+  },
+  {
+    "slug": "phylo-00-overview",
+    "title": "Start here: phylogenomics overview and installing the tools",
+    "kind": "setup",
+    "summary": "What these analyses need (an outgroup in the VCF), which tutorials are coming next, and how to install PAUP*, Dsuite, Ruby and the other tools.",
+    "tags": [
+      "outgroup",
+      "PAUP*",
+      "Dsuite"
+    ],
+    "updated": "2026-11-17",
+    "series": "Part 2 · Phylogenomics and introgression",
+    "series_repo": "https://github.com/luassoares/genomics-tutorials",
+    "folder": "phylogenomics",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/phylogenomics",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/phylogenomics/README.md"
   },
   {
     "slug": "snp-01-svdquartets",
@@ -25,15 +232,14 @@
     "tags": [
       "phylogenomics",
       "SVDQuartets",
-      "PAUP*",
-      "VCF"
+      "PAUP*"
     ],
-    "updated": "2026-11-09",
-    "series": "Phylogenomics & introgression with SNP data",
+    "updated": "2026-11-17",
+    "series": "Part 2 · Phylogenomics and introgression",
     "series_repo": "https://github.com/luassoares/genomics-tutorials",
-    "folder": "01_svdquartets",
-    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/01_svdquartets",
-    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/01_svdquartets/README.md"
+    "folder": "phylogenomics/01_svdquartets",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/phylogenomics/01_svdquartets",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/phylogenomics/01_svdquartets/README.md"
   },
   {
     "slug": "snp-02-ancestry-painting",
@@ -42,15 +248,14 @@
     "summary": "Are putative hybrids heterozygous at sites fixed between the parents? Test hybrid origin and tell F1s from later-generation hybrids and backcrosses.",
     "tags": [
       "hybridization",
-      "introgression",
-      "VCF"
+      "introgression"
     ],
-    "updated": "2026-11-09",
-    "series": "Phylogenomics & introgression with SNP data",
+    "updated": "2026-11-17",
+    "series": "Part 2 · Phylogenomics and introgression",
     "series_repo": "https://github.com/luassoares/genomics-tutorials",
-    "folder": "02_ancestry_painting",
-    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/02_ancestry_painting",
-    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/02_ancestry_painting/README.md"
+    "folder": "phylogenomics/02_ancestry_painting",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/phylogenomics/02_ancestry_painting",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/phylogenomics/02_ancestry_painting/README.md"
   },
   {
     "slug": "snp-03-dsuite",
@@ -63,11 +268,12 @@
       "Dsuite",
       "ABBA-BABA"
     ],
-    "updated": "2026-11-09",
-    "series": "Phylogenomics & introgression with SNP data",
+    "updated": "2026-11-17",
+    "series": "Part 2 · Phylogenomics and introgression",
     "series_repo": "https://github.com/luassoares/genomics-tutorials",
-    "folder": "03_dsuite",
-    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/03_dsuite",
-    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/03_dsuite/README.md"
+    "folder": "phylogenomics/03_dsuite",
+    "repo": "https://github.com/luassoares/genomics-tutorials/tree/main/phylogenomics/03_dsuite",
+    "source": "https://raw.githubusercontent.com/luassoares/genomics-tutorials/main/phylogenomics/03_dsuite/README.md",
+    "featured": true
   }
 ]

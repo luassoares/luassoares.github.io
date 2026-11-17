@@ -14,7 +14,7 @@ Dsuite: <https://github.com/millanek/Dsuite>
 | [`scripts/make_dsuite_inputs.py`](scripts/make_dsuite_inputs.py) | Makes the SETS file and the guide tree from a popmap and an SVDQuartets tree |
 | [`scripts/summarize_dsuite.py`](scripts/summarize_dsuite.py) | Multiple-testing correction and summary of the significant trios |
 
-**Requirements:** Dsuite, Python 3 (see [00_setup](../00_setup/)). A guide
+**Requirements:** Dsuite, Python 3 (see [Installing the tools](../#installing-the-tools)). A guide
 tree, e.g. from [01_svdquartets](../01_svdquartets/).
 
 ---

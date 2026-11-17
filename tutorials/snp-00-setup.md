@@ -1,131 +1,199 @@
-# 00 — Setup: installing the tools without root access
+# 00 — Setup: conda and how to organize your project
 
-All tools are installed in your home directory, using conda when possible.
-Commands are for a Linux (Ubuntu) server.
+If you are new to the terminal, read [00_linux_basics](../00_linux_basics/)
+first.
 
-| Tool | Used in | Install |
-|---|---|---|
-| PAUP\* | 01 SVDQuartets | binary + conda environment (below) |
-| vcftools / bcftools | filtering | `conda install -c bioconda vcftools bcftools` |
-| vcf2phylip.py | 01 SVDQuartets | download (below) |
-| Ruby | 02 Ancestry painting | `conda install -c conda-forge ruby` |
-| Dsuite | 03 Dsuite | compile (below) |
-| Python 3 | scripts of this repository, `dtools.py` | `numpy`, `pandas`, `matplotlib` for `dtools.py` |
+Before starting, prepare two things:
 
-## 1. PAUP\*
+1. **conda**, to install the programs without administrator (root) access,
+   each analysis in its own environment;
+2. **a project folder**, with the data, scripts and results of each
+   analysis kept apart.
 
-### 1.1 The `libgfortran.so.4` error
+Each tutorial starts with an **Install** section that shows how to install
+the programs needed for that analysis only.
 
-The Linux build of PAUP\* needs an old Fortran runtime (GCC 7). On recent
-Ubuntu versions (22.04 and later) it fails with:
+---
 
-```
-error while loading shared libraries: libgfortran.so.4: cannot open shared object file: No such file or directory
-```
+## 1. conda
 
-Install the library in a conda environment:
+conda installs programs and their dependencies in your home folder. A
+**conda environment** is a separate set of programs: if two analyses need
+different versions of the same program, each one has its own environment
+and they do not conflict.
 
-```bash
-conda create -n paup python=2.7
-conda activate paup
-conda install -c conda-forge libgfortran4
-ls $CONDA_PREFIX/lib | grep gfortran      # should list libgfortran.so.4
-```
+### 1.1 Install conda (once)
 
-(With `sudo` on Ubuntu 18.04/20.04, `sudo apt install libgfortran4` also works.)
-
-### 1.2 Download
-
-Get the Linux build from <https://phylosolutions.com/paup-test/>:
+On a Linux server, install Miniforge (a small conda installation that uses
+the conda-forge channel by default):
 
 ```bash
-mkdir -p ~/programs && cd ~/programs
-wget https://phylosolutions.com/paup-test/paup4a169_ubuntu64.gz    # check the newest version on the site
-gzip -d paup4a169_ubuntu64.gz       # .gz, not .zip: use gzip, not unzip
-chmod +x paup4a169_ubuntu64
-```
-
-PAUP\* test builds expire. If PAUP\* says the version has expired, download
-the newest one.
-
-Test it:
-
-```bash
-conda activate paup
-LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH ./paup4a169_ubuntu64
-```
-
-### 1.3 A `paup` command
-
-To call PAUP\* with just `paup`, from any folder and without activating the
-conda environment, create a small wrapper script. Run this **from the folder
-with the PAUP\* executable, with the `paup` environment active** (the script
-records the absolute paths):
-
-```bash
-conda activate paup
-cd ~/programs
-
-mkdir -p ~/bin
-cat > ~/bin/paup << EOF
-#!/bin/bash
-export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:\$LD_LIBRARY_PATH
-exec $(pwd)/paup4a169_ubuntu64 "\$@"
-EOF
-chmod +x ~/bin/paup
-cat ~/bin/paup        # should show absolute paths, not $CONDA_PREFIX
-```
-
-Add `~/bin` to your `PATH` (`~/.bashrc` for bash, `~/.zshrc` for zsh):
-
-```bash
-echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+cd ~
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+bash Miniforge3-Linux-x86_64.sh        # accept the license and the default folder; answer "yes" to initialize
 source ~/.bashrc
-which paup
-paup
+conda --version
 ```
 
-> An `alias` would not work in scripts, `nohup` or job schedulers; a script
-> in the `PATH` does.
-
-## 2. Dsuite
+Add the bioconda channel, where most bioinformatics programs are:
 
 ```bash
-cd ~/programs
-git clone https://github.com/millanek/Dsuite.git
-cd Dsuite
-make
-echo 'export PATH=$HOME/programs/Dsuite/Build:$PATH' >> ~/.bashrc
-source ~/.bashrc
-Dsuite          # shows the help
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
 ```
 
-The f-branch plotting script is `~/programs/Dsuite/utils/dtools.py`.
+> If conda is already installed on your server (e.g. Anaconda or
+> Miniconda), you do not need to install it again: run only the
+> `conda config` commands.
 
-## 3. vcf2phylip.py
+### 1.2 Use environments
 
 ```bash
-wget https://raw.githubusercontent.com/millanek/tutorials/refs/heads/master/analysis_of_introgression_with_snp_data/src/vcf2phylip.py
-python vcf2phylip.py -h
+conda create -n popgen vcftools bcftools    # create an environment with two programs
+conda activate popgen                        # use it
+vcftools --version                           # the programs are now available
+conda deactivate                             # leave the environment
+conda env list                               # list your environments
+conda install -n popgen plink2               # add a program to an existing environment
 ```
 
-The original script and its documentation are at
-<https://github.com/edgardomortiz/vcf2phylip> (Ortiz 2019).
+Good practice:
 
-## 4. Long runs
+- **One environment per analysis (or group of analyses).** Environments
+  with many programs become slow to install and break more easily. The
+  tutorials say which environment to create.
+- **Do not install programs in `base`** (the environment that is active
+  when you log in).
+- **Write down the versions** for the methods section of your paper:
+  `conda list -n popgen > popgen_versions.txt`.
 
-Run long analyses inside `byobu`, `tmux` or `screen`, so they keep running
-if the connection drops:
+### 1.3 R and RStudio
+
+The analyses in R (PCA, DAPC, sNMF, plots) can be run in **RStudio** on
+your own computer, which is easier for exploring the results: download R
+(<https://cran.r-project.org/>) and RStudio
+(<https://posit.co/download/rstudio-desktop/>). Copy the input files (VCF,
+popmap) from the server to your computer.
+
+Long R analyses (conStruct) are better run on the server. Create an R
+environment there:
+
+```bash
+conda create -n r-popgen r-base r-vcfr r-adegenet r-ggplot2
+conda activate r-popgen
+R        # then install the other packages inside R with install.packages()
+```
+
+## 2. Organize the project
+
+Keep each analysis in its own folder, and inside it separate the **input
+data**, the **scripts** and the **results**:
+
+```
+my_project/
+├── 00_raw_data/              raw reads as received from the sequencing company (never edit them)
+├── 01_raw_reads/
+│   ├── data/                 input of this step
+│   ├── scripts/              scripts used in this step
+│   └── results/              output of this step
+├── 02_snp_calling/
+│   ├── data/
+│   ├── scripts/
+│   └── results/
+├── 03_filtering/
+│   ├── data/
+│   ├── scripts/
+│   └── results/
+├── 05_pca_dapc/
+│   ├── data/
+│   ├── scripts/
+│   └── results/
+└── ...
+```
+
+Create the folders of an analysis with:
+
+```bash
+mkdir -p ~/my_project/03_filtering/{data,scripts,results}
+```
+
+**Input data.** The output of one step is the input of the next. Instead of
+copying large files, create a link to them in the `data/` folder of the
+next analysis:
+
+```bash
+cd ~/my_project/05_pca_dapc/data
+ln -s ../../03_filtering/results/my_data-miss0.9-maf0.01-th100.recode.vcf .
+cp ../../03_filtering/data/popmap.txt .
+ls -l        # a link shows an arrow: name -> original file
+```
+
+**Scripts.** Download these tutorials once:
+
+```bash
+cd ~
+git clone https://github.com/luassoares/genomics-tutorials.git
+```
+
+Copy the scripts of each tutorial to the `scripts/` folder of the analysis,
+and edit the settings at the top. Run them from the analysis folder, so
+that `data/` and `results/` are found:
+
+```bash
+cd ~/my_project/03_filtering
+cp ~/genomics-tutorials/03_filtering/scripts/* scripts/
+nano scripts/filter_vcf.sh          # edit the settings
+bash scripts/filter_vcf.sh
+```
+
+**Notes.** Keep a text file in each analysis folder (e.g. `notes.md`) with
+the commands you ran, the versions of the programs and what you decided
+(e.g. why K = 3). You will need it for the methods section of your paper.
+
+### 2.1 Files used in many tutorials
+
+- **Popmap**: two columns, tab-separated, `<population> <sample ID>`, with
+  the sample IDs exactly as in the VCF:
+
+  ```
+  PopA	1023
+  PopA	1024
+  PopB	1101
+  Outgroup1	1201
+  ```
+
+- **Coordinates** (conStruct, sNMF/TESS3, EEMS, FEEMS): `<sample ID>
+  <tab> <longitude> <tab> <latitude>`, decimal degrees, **longitude
+  first**:
+
+  ```
+  1023	-50.950	-25.200
+  1101	-51.217	-25.333
+  ```
+
+> **Files made in Excel or on Windows** have hidden Windows line endings that
+> break many programs (sample names end with `\r`). Convert them with
+> `dos2unix popmap.txt`, or `sed -i 's/\r$//' popmap.txt`.
+
+## 3. Long runs
+
+Run long analyses inside `byobu` (see
+[00_linux_basics](../00_linux_basics/#5-byobu-keep-analyses-running)), so
+they keep running if the connection drops:
 
 ```bash
 byobu                # start (or reattach)
-bash my_script.sh
+bash scripts/my_script.sh
 # F6 = detach; run `byobu` again later to reattach
 ```
 
-To show the output on screen **and** save it to a file, the scripts of
-these tutorials use:
+To show the output on screen **and** save it to a file (to check later what
+happened):
 
 ```bash
-exec > >(tee my_log.out) 2>&1
+bash scripts/my_script.sh 2>&1 | tee results/my_script.log
 ```
+
+Check how many CPUs the server has with `nproc`, and do not use all of them
+if other people work on the same server.

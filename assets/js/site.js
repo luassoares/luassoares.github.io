@@ -127,9 +127,9 @@
   function tutorialCard(t) {
     return `
       <a class="card" href="tutorial.html?t=${encodeURIComponent(t.slug)}">
-        <span class="kind ${esc(t.kind)}">${esc(t.kind)}</span>
+        <span class="kind ${esc(t.kind)}">${esc(t.kind === "setup" ? "getting started" : t.kind)}</span>
         <h3>${esc(t.title)}</h3>
-        <p class="summary">${esc(t.summary)}</p>
+        <p class="summary">${t.summary}</p>
         <div class="foot">
           <div class="chips">${(t.tags || []).map((g) => `<span class="chip">${esc(g)}</span>`).join("")}</div>
           <span>${fmtDate(t.updated)}</span>
@@ -196,7 +196,8 @@
       $("#news").innerHTML = news.slice(0, 5).map((n) => `<li><span class="date">${esc(fmtDate(n.date))}</span><span>${n.text}</span></li>`).join("") || '<li class="muted">No news yet.</li>';
       const featured = pubs.filter((p) => p.featured).slice(0, 3);
       $("#featured-pubs").innerHTML = (featured.length ? featured : pubs.slice(0, 3)).map(pubHTML).join("");
-      $("#latest-tuts").innerHTML = tuts.slice().sort((a, b) => (b.updated || "").localeCompare(a.updated || "")).slice(0, 3).map(tutorialCard).join("");
+      const feat = tuts.filter((t) => t.featured);
+      $("#latest-tuts").innerHTML = (feat.length ? feat : tuts.slice().sort((a, b) => (b.updated || "").localeCompare(a.updated || ""))).slice(0, 3).map(tutorialCard).join("");
     },
 
     async publications() {
@@ -230,7 +231,7 @@
     async tutorials() {
       const tuts = await getJSON("data/tutorials.json");
       const kinds = [...new Set(tuts.map((t) => t.kind))];
-      const label = { pipeline: "Pipelines", tutorial: "Tutorials", setup: "Setup" };
+      const label = { pipeline: "Pipelines", tutorial: "Tutorials", setup: "Getting started" };
       $("#filters").innerHTML = ["all", ...kinds].map((k) => `<button class="filter ${k === "all" ? "on" : ""}" data-type="${esc(k)}">${k === "all" ? "All" : esc(label[k] || k)}</button>`).join("");
       let current = "all", query = "";
       function draw() {
@@ -278,6 +279,14 @@
         ${meta.repo ? `<a class="btn" style="padding:.3rem .8rem;font-size:.85rem" href="${esc(meta.repo)}" target="_blank" rel="noopener">${ICONS.github} View on GitHub</a>` : ""}`;
       if (h1) h1.after(metaRow); else $("#article").prepend(metaRow);
 
+      // GitHub-style ids on headings, so links like #5-without-a-reference work
+      const used = {};
+      document.querySelectorAll("#article h1, #article h2, #article h3, #article h4").forEach((h) => {
+        let id = h.textContent.trim().toLowerCase().replace(/[^\p{L}\p{N}_\- ]/gu, "").replace(/ /g, "-");
+        if (used[id] !== undefined) { used[id] += 1; id += "-" + used[id]; } else used[id] = 0;
+        h.id = id;
+      });
+
       // Relative links in the GitHub README → GitHub, or to this site if it is another tutorial
       if (meta.series_repo && meta.folder) {
         const base = `${meta.series_repo}/blob/main/${meta.folder}/`;
@@ -287,9 +296,9 @@
           if (!v || /^(https?:|mailto:|#)/.test(v)) return;
           const u = new URL(v, base);
           if (attr === "src") { el.src = u.href.replace("/blob/", "/raw/"); return; }
-          const m = u.pathname.match(/\/(?:blob|tree)\/main\/([^/]+)\/?$/);
+          const m = u.pathname.match(/\/(?:blob|tree)\/main\/(.+?)\/?(?:README\.md)?$/);
           const twin = m && tuts.find((t) => t.series_repo === meta.series_repo && t.folder === m[1]);
-          el.href = twin ? `tutorial.html?t=${encodeURIComponent(twin.slug)}` : u.href;
+          el.href = twin ? `tutorial.html?t=${encodeURIComponent(twin.slug)}${u.hash}` : u.href;
           if (!twin) { el.target = "_blank"; el.rel = "noopener"; }
         });
       }
@@ -306,8 +315,8 @@
 
       // Table of contents
       const heads = [...document.querySelectorAll("#article h2")];
-      heads.forEach((h, i) => (h.id = h.id || "s" + i + "-" + h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, "-")));
       $("#toc").innerHTML = heads.length ? "<strong>On this page</strong>" + heads.map((h) => `<a href="#${h.id}">${esc(h.textContent)}</a>`).join("") : "";
+      if (location.hash) { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView(); }
     },
 
     async cv(profile) {

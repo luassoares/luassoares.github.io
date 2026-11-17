@@ -15,7 +15,7 @@ Original tutorial (Malinsky & Matschiner):
 | [`scripts/add_support_and_pops.py`](scripts/add_support_and_pops.py) | Adds bootstrap support to the trees (PAUP\* does not save it) and makes versions with population names |
 
 **Requirements:** PAUP\*, vcftools (or bcftools), `vcf2phylip.py`, Python 3
-(see [00_setup](../00_setup/)).
+(see [Installing the tools](../#installing-the-tools)).
 
 ---
 

@@ -21,7 +21,7 @@ The Ruby scripts by M. Matschiner (`get_fixed_site_gts.rb`,
 `plot_fixed_site_gts.rb`) are downloaded automatically from the original
 tutorial.
 
-**Requirements:** Ruby, Python 3 (see [00_setup](../00_setup/)).
+**Requirements:** Ruby, Python 3 (see [Installing the tools](../#installing-the-tools)).
 
 ---
 
